@@ -5,11 +5,11 @@
 package infosi.partielmedev;
 
 /**
- *
+ * Classe pour le respect des règles du jeu
  * @author Catherine
  */
 public class Game {
-	final int maxError = 7;
+	public static final int MAX_ERROR = 7;
 	private int state; // 0: pas de jeu, 1: en cours, 2: gagnée, 3: perdue
 	private int errorCount;
 	private String secretWord;
@@ -33,7 +33,7 @@ public class Game {
 			
 			// Si le caractère n'est pas présent, on l'ajoute
 			if (remainingLetter.indexOf(char2include) == -1) {
-				remainingLetter += char2include;
+				remainingLetter = remainingLetter.concat(Character.toString(char2include));
 			}
 		}
 	}
@@ -78,7 +78,7 @@ public class Game {
 		// On met le caractère en majuscule si ce n'est pas le cas
 		c = Character.toUpperCase(c);
 
-		if (Character.isLetter(c) && knownLetter.indexOf(c) != -1 && state == 1) {
+		if (Character.isLetter(c) && knownLetter.indexOf(c) == -1 && state == 1) {
 			int index = remainingLetter.indexOf(c);
 
 			if (index != -1) {
@@ -94,7 +94,7 @@ public class Game {
 		}
 		
 		// On met à jour l'état de la partie si besoin
-		if (errorCount >= maxError) {
+		if (errorCount >= MAX_ERROR) {
 			state = 3; // Le joueur a perdu
 		} else if (remainingLetter.length() == 0) {
 			state = 2; // Le joueur a gagné
