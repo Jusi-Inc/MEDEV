@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="JeuDeDame" default="build" basedir=".">
+	<description>Projet pendu</description>
+
+	<!-- Définition des chemins -->
+	<property name="src.dir" location="src/main/java"/>
+	<property name="test.dir" location="src/test/java"/>
+	<property name="build.dir" location="target/classes"/>
+	<property name="test.build.dir" location="target/test-classes"/>
+	<property name="test.build.report.dir" location="target/test-report"/>
+	<property name="dist.dir" location="dist"/>
+	<property name="javadoc.dir" location="doc"/>
+	<property name="main.class" value="infosi.partielmedev"/>
+
+
+	<path id="test.classpath">
+		<pathelement path="${test.build.dir}"/>
+		<pathelement path="${build.dir}"/>
+		<fileset dir="${ant.home}/lib" includes="*.jar"/>
+		<pathelement path="lib/junit-platform-console-standalone-1.14.2.jar"/>
+	</path>
+
+	
+
+	<!-- Vérification des dépendances -->
+	<target name="checkDependencies" description="Vérifier si les dépendances sont satisfaites">
+		<echo message="Répertoire des sources: ${src.dir}"/>
+		<echo message="Répertoire de compilation: ${build.dir}"/>
+		<echo message="Répertoire de distribution: ${dist.dir}"/>
+		
+		<condition property="src.available">
+			<available file="${src.dir}" type="dir"/>
+		</condition>
+	</target>
+
+	<!-- Initialisation -->
+	<target name="init" depends="checkDependencies" description="Créer les répertoires nécessaires">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${test.build.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		<echo message="Répertoires créés"/>
+	</target>
+
+	<!-- Nettoyage -->
+	<target name="clean" description="Supprimer les fichiers générés">
+		<delete dir="${build.dir}"/>
+		<delete dir="${test.build.dir}"/>
+		<delete dir="${dist.dir}"/>
+		<echo message="Nettoyage terminé"/>
+	</target>
+
+	<!-- Compilation -->
+	<target name="compile" depends="init" description="Compiler les sources">
+		<echo message="Compilation..."/>
+		<javac srcdir="${src.dir}" 
+			   destdir="${build.dir}" 
+			   includeAntRuntime="false"
+			   encoding="UTF-8"
+			   release="17"/>
+		<echo message="Compilation terminée!"/>
+	</target>
+
+	<!-- Compilation des tests -->
+	<target name="compile-tests" depends="compile" description="Compiler les tests">
+		<echo message="Compilation des tests..."/>
+		<javac srcdir="${test.dir}" 
+			   destdir="${test.build.dir}" 
+			   includeAntRuntime="false"
+			   classpathref="test.classpath"
+			   encoding="UTF-8"
+			   release="17"/>
+		<echo message="Tests compilés!"/>
+	</target>
+
+
+	<!-- Exécution des tests -->
+	<target name="test" depends="compile-tests" description="Exécution des tests">
+		<echo message="Exécution des test..."/>
+		<junitlauncher haltOnFailure="true" printSummary="true">
+			<classpath refid="test.classpath"/>
+			<testclasses outputdir="${test.build.report.dir}">
+				<fileset dir="${test.build.dir}">
+					<include name="**/*Test.class"/>
+					<include name="**/*Tests.class"/>
+				</fileset>
+			</testclasses>
+		</junitlauncher>
+	</target>
+
+
+	<!-- Génération de la JavaDoc -->
+	<target name="javadoc">
+		<javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}" >
+			<fileset dir="${src.dir}" defaultexcludes="yes">
+			<include name="**" />
+			</fileset>
+		</javadoc>
+	</target> 
+
+
+	<!-- Création du JAR -->
+	<target name="jar" depends="compile" description="Créer le fichier JAR">
+		<echo message="Création du JAR..."/>
+		<jar destfile="${dist.dir}/JeuDeDame.jar" basedir="${build.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main.class}"/>
+			</manifest>
+		</jar>
+		<echo message="JAR créé: ${dist.dir}\\JeuDeDame.jar"/>
+	</target>
+
+	<!-- Exécution du programme -->
+	<target name="run" depends="compile" description="Exécuter l'application">
+		<echo message="Exécution de ${main.class}..."/>
+		<java classname="${main.class}" fork="true">
+			<classpath>
+				<pathelement location="${build.dir}"/>
+			</classpath>
+		</java>
+	</target>
+
+	<!-- Build complet -->
+	<target name="build" depends="jar, test, javadoc" description="Construire l'application complète">
+		<echo message="Build terminé!"/>
+	</target>
+</project>
