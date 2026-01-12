@@ -42,13 +42,14 @@ jobs:
 
       # 5️⃣ Build Maven
       - name: Build Maven
-        working-directory: PartielMedev
         run: mvn -B clean verify
+        working-directory: PartielMedev
 
-      # 6️⃣ SonarCloud Scan avec le scanner CLI
+      # 6️⃣ SonarCloud Scan
       - name: SonarCloud Scan
         uses: sonarsource/sonarqube-scan-action@v5
         with:
+          projectBaseDir: PartielMedev   # <-- Ici on indique le dossier correct
           args: >
             -Dsonar.projectKey=jusi-inc_MEDEV
             -Dsonar.organization=jusi-inc
@@ -56,4 +57,3 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        working-directory: PartielMedev
