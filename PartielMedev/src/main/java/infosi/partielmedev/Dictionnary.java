@@ -32,7 +32,7 @@ public class Dictionnary {
 	 * Contructeur pour avoir un mot depuis une liste
 	 * @param list La liste à copier
 	 */
-	public Dictionnary(List<String> list) {
+	public Dictionnary(ArrayList<String> list) { // NOSONAR
 		rand = new Random();
 		filename = "";
 		wordList = new ArrayList<>(list);
@@ -154,7 +154,7 @@ public class Dictionnary {
 	 *
 	 * @param wordList
 	 */
-	public void setWordList(List<String> wordList) {
+	public void setWordList(ArrayList<String> wordList) { // NOSONAR
 		this.wordList = new ArrayList<>(wordList);
 	}
 
