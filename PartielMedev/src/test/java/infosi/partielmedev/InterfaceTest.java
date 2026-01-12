@@ -18,30 +18,34 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class InterfaceTest {
     
-    public InterfaceTest() {
+    InterfaceTest() {
     }
     
     @BeforeAll
-    public static void setUpClass() {
+    static void setUpClass() {
+        // Méthode exécutée une fois avant tous les tests
     }
     
     @AfterAll
-    public static void tearDownClass() {
+    static void tearDownClass() {
+        // Méthode exécutée une fois après tous les tests
     }
     
     @BeforeEach
-    public void setUp() {
+    void setUp() {
+        // Méthode exécutée avant chaque test
     }
     
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
+        // Méthode exécutée après chaque test
     }
 
     /**
      * Test of afficherJeu method, of class Interface.
      */
     @Test
-    public void testAfficherJeu() {
+    void testAfficherJeu() {
         System.out.println("afficherJeu");
         String motSecret = "JUSTIN";
         Set<Character> lettresDecouvertes = Set.of('J', 'A');
@@ -56,7 +60,7 @@ public class InterfaceTest {
      * Test of afficherVictoire method, of class Interface.
      */
     @Test
-    public void testAfficherVictoire() {
+    void testAfficherVictoire() {
         System.out.println("afficherVictoire");
         String motSecret = "JUSTIN";
         Interface instance = new Interface();
@@ -68,7 +72,7 @@ public class InterfaceTest {
      * Test of afficherDefaite method, of class Interface.
      */
     @Test
-    public void testAfficherDefaite() {
+    void testAfficherDefaite() {
         System.out.println("afficherDefaite");
         String motSecret = "JUSTIN";
         Interface instance = new Interface();
@@ -80,18 +84,18 @@ public class InterfaceTest {
      * Test of afficherInvite method, of class Interface.
      */
     @Test
-    public void testAfficherInvite() {
+    void testAfficherInvite() {
         System.out.println("afficherInvite");
         Interface instance = new Interface();
         // Test que la méthode s'exécute sans erreur
-        assertDoesNotThrow(() -> instance.afficherInvite());
+        assertDoesNotThrow(instance::afficherInvite);
     }
 
     /**
      * Test of afficherErreur method, of class Interface.
      */
     @Test
-    public void testAfficherErreur() {
+    void testAfficherErreur() {
         System.out.println("afficherErreur");
         String message = "Erreur de test";
         Interface instance = new Interface();

@@ -17,23 +17,27 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class TourDeJeuTest {
     
-    public TourDeJeuTest() {
+    TourDeJeuTest() {
     }
     
     @BeforeAll
-    public static void setUpClass() {
+    static void setUpClass() {
+        // Méthode exécutée une fois avant tous les tests
     }
     
     @AfterAll
-    public static void tearDownClass() {
+    static void tearDownClass() {
+        // Méthode exécutée une fois après tous les tests
     }
     
     @BeforeEach
-    public void setUp() {
+    void setUp() {
+        // Méthode exécutée avant chaque test
     }
     
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
+        // Méthode exécutée après chaque test
     }
 
     /**
@@ -41,7 +45,7 @@ public class TourDeJeuTest {
      * Note: Ce test est commenté car jouerTour attend une entrée utilisateur
      */
     @Test
-    public void testJouerTour() {
+    void testJouerTour() {
         System.out.println("jouerTour");
         // Test désactivé car la méthode nécessite une interaction utilisateur
         // On teste plutôt les méthodes sans interaction
@@ -52,7 +56,7 @@ public class TourDeJeuTest {
      * Test of verifierFinJeu method, of class TourDeJeu.
      */
     @Test
-    public void testVerifierFinJeu() {
+    void testVerifierFinJeu() {
         System.out.println("verifierFinJeu");
         TourDeJeu instance = new TourDeJeu();
         // Test avec un jeu en cours
@@ -76,7 +80,7 @@ public class TourDeJeuTest {
      * Note: Ce test est commenté car jouerPartie attend des entrées utilisateur
      */
     @Test
-    public void testJouerPartie() {
+    void testJouerPartie() {
         System.out.println("jouerPartie");
         // Test désactivé car la méthode nécessite une interaction utilisateur
         assertTrue(true, "Test ignoré - nécessite interaction utilisateur");
@@ -86,9 +90,8 @@ public class TourDeJeuTest {
      * Test of fermer method, of class TourDeJeu.
      */
     @Test
-    public void testFermer() {
+    void testFermer() {
         System.out.println("fermer");
-        TourDeJeu instance = new TourDeJeu();
         // Test que la méthode s'exécute sans erreur (mais ne la ferme pas réellement)
         assertDoesNotThrow(() -> {});
         // Note: On ne ferme pas le scanner pour éviter de corrompre System.in
