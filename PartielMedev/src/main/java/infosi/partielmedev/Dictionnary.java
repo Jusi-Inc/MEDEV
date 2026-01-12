@@ -23,7 +23,7 @@ public class Dictionnary {
 	 * @param file Le nom du fichier à lire
 	 */
 	public Dictionnary(String file) {
-		rand = new Random();
+		rand = new Random(); // NOSONAR
 		filename = file;
 		wordList = new ArrayList<>();
 	}
@@ -33,7 +33,7 @@ public class Dictionnary {
 	 * @param list La liste à copier
 	 */
 	public Dictionnary(List<String> list) {
-		rand = new Random();
+		rand = new Random(); // NOSONAR
 		filename = "";
 		wordList = new ArrayList<>(list);
 	}
@@ -43,7 +43,7 @@ public class Dictionnary {
 	 * @param dico L'instance à copier
 	 */
 	public Dictionnary(Dictionnary dico) {
-		rand = new Random();
+		rand = new Random(); // NOSONAR
 		filename = dico.getFilename();
 		wordList = new ArrayList<>(dico.getWordList());
 	}
