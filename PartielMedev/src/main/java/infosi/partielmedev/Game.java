@@ -5,7 +5,7 @@
 package infosi.partielmedev;
 
 /**
- *
+ * Classe pour le respect des règles du jeu
  * @author Catherine
  */
 public class Game {
@@ -78,7 +78,7 @@ public class Game {
 		// On met le caractère en majuscule si ce n'est pas le cas
 		c = Character.toUpperCase(c);
 
-		if (Character.isLetter(c) && knownLetter.indexOf(c) != -1 && state == 1) {
+		if (Character.isLetter(c) && knownLetter.indexOf(c) == -1 && state == 1) {
 			int index = remainingLetter.indexOf(c);
 
 			if (index != -1) {
