@@ -6,7 +6,6 @@ package infosi.partielmedev;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,7 +47,7 @@ public class DictionnaryTest {
 		
 		ArrayList<String> list = new ArrayList<>();
 		list.add("HI");
-		Dictionnary instance = Dictionnary(list);
+		Dictionnary instance = new Dictionnary(list);
 		String expResult = "HI";
 		String result = instance.pickWord();
 		assertEquals(expResult, result);
@@ -67,7 +66,7 @@ public class DictionnaryTest {
 		list.add("HI");
 		list.add("HELLO");
 		list.add("BRIDGE");
-		Dictionnary instance = Dictionnary(list);
+		Dictionnary instance = new Dictionnary(list);
 		
 		String expResult = "HELLO";
 		String result = instance.chooseWord(i);
@@ -85,7 +84,7 @@ public class DictionnaryTest {
 		list.add("HI");
 		list.add("HELLO");
 		list.add("BRIDGE");
-		Dictionnary instance = Dictionnary(new List<String>(list));
+		Dictionnary instance = new Dictionnary(list);
 		
 		int expResult = 3;
 		int result = instance.listSize();
@@ -98,11 +97,9 @@ public class DictionnaryTest {
 	@Test
 	public void testReadFile() throws Exception {
 		System.out.println("readFile");
-		Dictionnary instance = null;
-		boolean expResult = false;
+		Dictionnary instance = new Dictionnary("dico.txt");
+		boolean expResult = true;
 		boolean result = instance.readFile();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}	
 }
