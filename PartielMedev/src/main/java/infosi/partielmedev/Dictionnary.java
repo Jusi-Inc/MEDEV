@@ -32,7 +32,7 @@ public class Dictionnary {
 	 * Contructeur pour avoir un mot depuis une liste
 	 * @param list La liste à copier
 	 */
-	public Dictionnary(ArrayList<String> list) { // NOSONAR
+	public Dictionnary(List<String> list) {
 		rand = new Random();
 		filename = "";
 		wordList = new ArrayList<>(list);
@@ -109,12 +109,13 @@ public class Dictionnary {
 				if (!word.isEmpty()) {
 					wordList.add(word);
 				}
-			
+				line = file.readLine();
 			}
 			file.close();
 			res = true;
 		} catch(IOException e) {
-			throw new Exception("Erreur lors de la lecture de la sauvegarde"); // NOSONAR
+			e.printStackTrace();
+			throw new Exception("Erreur lors de la lecture"); // NOSONAR
 		}
 
 		return res;
@@ -154,7 +155,7 @@ public class Dictionnary {
 	 *
 	 * @param wordList
 	 */
-	public void setWordList(ArrayList<String> wordList) { // NOSONAR
+	public void setWordList(List<String> wordList) {
 		this.wordList = new ArrayList<>(wordList);
 	}
 
