@@ -114,7 +114,6 @@ public class Dictionnary {
 			file.close();
 			res = true;
 		} catch(IOException e) {
-			e.printStackTrace();
 			throw new Exception("Erreur lors de la lecture"); // NOSONAR
 		}
 
