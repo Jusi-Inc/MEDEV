@@ -11,6 +11,7 @@
 	<property name="dist.dir" location="dist"/>
 	<property name="javadoc.dir" location="doc"/>
 	<property name="main.class" value="infosi.partielmedev"/>
+	<property name="jar.name" value="Pendu"/>
 
 
 	<path id="test.classpath">
@@ -101,12 +102,12 @@
 	<!-- Création du JAR -->
 	<target name="jar" depends="compile" description="Créer le fichier JAR">
 		<echo message="Création du JAR..."/>
-		<jar destfile="${dist.dir}/JeuDeDame.jar" basedir="${build.dir}">
+		<jar destfile="${dist.dir}/${jar.name}.jar" basedir="${build.dir}">
 			<manifest>
 				<attribute name="Main-Class" value="${main.class}"/>
 			</manifest>
 		</jar>
-		<echo message="JAR créé: ${dist.dir}\\JeuDeDame.jar"/>
+		<echo message="JAR créé: ${dist.dir}\\${jar.name}.jar"/>
 	</target>
 
 	<!-- Exécution du programme -->
