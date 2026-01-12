@@ -39,6 +39,23 @@ public class Game {
 	}
 	
 	/**
+	 * Constructeur total de la classe
+	 * @param state
+	 * @param errorCount
+	 * @param secretWord
+	 * @param knownLetter
+	 * @param remainingLetter
+	 */
+	public Game(int state, int errorCount, String secretWord, String knownLetter, String remainingLetter) {
+		this.state = state;
+		this.errorCount = errorCount;
+		this.secretWord = secretWord;
+		this.knownLetter = knownLetter;
+		this.remainingLetter = remainingLetter;
+	}
+	
+
+	/**
 	 * Constructeur de copie
 	 * @param g le jeu à copier
 	 */
@@ -49,8 +66,6 @@ public class Game {
 		knownLetter = g.getKnownLetter();
 		remainingLetter = g.getRemainingLetter();
 	}
-	
-	
 	
 	/**
 	 * Essaie une lettre sur le pendue
@@ -64,10 +79,15 @@ public class Game {
 		c = Character.toUpperCase(c);
 
 		if (Character.isLetter(c) && knownLetter.indexOf(c) != -1 && state == 1) {
-			if (secretWord.indexOf(c) != -1) {
-				res = 1; // On change l'état du test
+			int index = remainingLetter.indexOf(c);
+
+			if (index != -1) {
+				res = 1; // On change l'état du test: bonne lettre
+
+				// On enlève la lettre de la liste
+				remainingLetter = remainingLetter.replace(Character.toString(c), "");
 			} else {
-				res = 2; // On change l'état du test
+				res = 2; // On change l'état du test: mauvaise lettre
 				errorCount++; // On ajoute une erreur
 			}
 			knownLetter += c; // On ajoute dans la liste des caractères vus
@@ -76,7 +96,7 @@ public class Game {
 		// On met à jour l'état de la partie si besoin
 		if (errorCount >= maxError) {
 			state = 3; // Le joueur a perdu
-		} else if (secretWord.indexOf('_') == 1) {
+		} else if (remainingLetter.length() == 0) {
 			state = 2; // Le joueur a gagné
 		}
 		
@@ -147,17 +167,19 @@ public class Game {
 		this.knownLetter = knownLetter;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getRemainingLetter() {
 		return remainingLetter;
 	}
 
+	/**
+	 *
+	 * @param remainingLetter
+	 */
 	public void setRemainingLetter(String remainingLetter) {
 		this.remainingLetter = remainingLetter;
 	}
-	
-	
-	
-	
-	
-	
 }
