@@ -96,7 +96,7 @@ public class Game {
 		// On met à jour l'état de la partie si besoin
 		if (errorCount >= MAX_ERROR) {
 			state = 3; // Le joueur a perdu
-		} else if (remainingLetter.length() == 0) {
+		} else if (remainingLetter.isEmpty()) {
 			state = 2; // Le joueur a gagné
 		}
 		
