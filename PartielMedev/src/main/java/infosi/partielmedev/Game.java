@@ -13,8 +13,8 @@ public class Game {
 	private int state; // 0: pas de jeu, 1: en cours, 2: gagnée, 3: perdue
 	private int errorCount;
 	private String secretWord;
-	private String word;
 	private String knownLetter;
+	private String remainingLetter;
 	
 	/**
 	 * Constructeur pour créer une partie
@@ -25,12 +25,15 @@ public class Game {
 		errorCount = 0;
 		secretWord = word2find.toUpperCase();
 		
-		// Initialisation du mot vide
-		word = secretWord;
+		// On initialise la liste des lettres à deviner
+		remainingLetter = "";
 		int len = secretWord.length();
 		for (int i = 0; i < len; i++) {
-			if (Character.isLetter(word.charAt(i))) {
-				word[i] = '_';
+			char char2include = secretWord.charAt(i);
+			
+			// Si le caractère n'est pas présent, on l'ajoute
+			if (remainingLetter.indexOf(char2include) == -1) {
+				remainingLetter += char2include;
 			}
 		}
 	}
@@ -43,8 +46,8 @@ public class Game {
 		state = g.getState();
 		errorCount = g.getErrorCount();
 		secretWord = g.getSecretWord();
-		word = g.getWord();
 		knownLetter = g.getKnownLetter();
+		remainingLetter = g.getRemainingLetter();
 	}
 	
 	
@@ -54,9 +57,28 @@ public class Game {
 	 * @param c Une lettre à essayer
 	 * @return 0 si aucun changement, 1 si la lettre est correcte, 2 si la lettre est fausse
 	 */
-	public int putCharacter(String c) {
+	public int putCharacter(char c) {
 		int res = 0;
 		
+		// On met le caractère en majuscule si ce n'est pas le cas
+		c = Character.toUpperCase(c);
+
+		if (Character.isLetter(c) && knownLetter.indexOf(c) != -1 && state == 1) {
+			if (secretWord.indexOf(c) != -1) {
+				res = 1; // On change l'état du test
+			} else {
+				res = 2; // On change l'état du test
+				errorCount++; // On ajoute une erreur
+			}
+			knownLetter += c; // On ajoute dans la liste des caractères vus
+		}
+		
+		// On met à jour l'état de la partie si besoin
+		if (errorCount >= maxError) {
+			state = 3; // Le joueur a perdu
+		} else if (secretWord.indexOf('_') == 1) {
+			state = 2; // Le joueur a gagné
+		}
 		
 		return res;
 	}
@@ -113,22 +135,6 @@ public class Game {
 	 *
 	 * @return
 	 */
-	public String getWord() {
-		return word;
-	}
-
-	/**
-	 *
-	 * @param word
-	 */
-	public void setWord(String word) {
-		this.word = word;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
 	public String getKnownLetter() {
 		return knownLetter;
 	}
@@ -139,6 +145,14 @@ public class Game {
 	 */
 	public void setKnownLetter(String knownLetter) {
 		this.knownLetter = knownLetter;
+	}
+
+	public String getRemainingLetter() {
+		return remainingLetter;
+	}
+
+	public void setRemainingLetter(String remainingLetter) {
+		this.remainingLetter = remainingLetter;
 	}
 	
 	
