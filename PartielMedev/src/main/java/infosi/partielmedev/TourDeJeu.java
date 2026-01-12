@@ -42,7 +42,7 @@ public class TourDeJeu {
         char lettre = demanderLettre();
         
         // Envoie la lettre au jeu et traite le résultat
-        int resultat = game.PutCharacter(lettre);
+        int resultat = game.putCharacter(lettre);
         
         // Traite le résultat
         traiterResultat(resultat, lettre);
