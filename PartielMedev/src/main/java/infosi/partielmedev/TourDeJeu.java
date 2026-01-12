@@ -31,6 +31,16 @@ public class TourDeJeu {
     }
     
     /**
+     * Constructeur avec interface et scanner personnalisés
+     * @param interfaceJeu L'interface à utiliser
+     * @param scanner Le scanner à utiliser pour les entrées
+     */
+    public TourDeJeu(Interface interfaceJeu, Scanner scanner) {
+        this.interfaceJeu = interfaceJeu;
+        this.scanner = scanner;
+    }
+    
+    /**
      * Joue un tour complet du jeu
      * @param game L'instance du jeu contenant la logique
      */

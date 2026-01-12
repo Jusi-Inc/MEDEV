@@ -82,8 +82,8 @@ public class PartielMedevTest {
     @Test
     void testMainMode1Joueur() {
         System.out.println("mainMode1Joueur");
-        // Simule l'entrée : 1 pour mode 1 joueur, puis N pour ne pas rejouer
-        String input = "1\nN\n";
+        // Simule l'entrée : 1 pour mode 1 joueur, puis N pour ne pas rejouer (deux fois car le mode 1 joueur continue)
+        String input = "1\n0\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         
@@ -122,8 +122,9 @@ public class PartielMedevTest {
     @Test
     void testMainMode2JoueursPartieComplete() {
         System.out.println("mainMode2JoueursPartieComplete");
-        // Simule l'entrée : 2 pour mode 2 joueurs, "TEST" comme mot, puis les lettres T, E, S, T, puis N pour ne pas rejouer
-        String input = "2\nTEST\nT\nE\nS\nN\n";
+        // Simule l'entrée : 2 pour mode 2 joueurs, "ABC" comme mot, puis les lettres A, B, C pour gagner, puis N pour ne pas rejouer
+        // On ajoute des lignes supplémentaires au cas où pour éviter NoSuchElementException
+        String input = "2\nABC\nA\nB\nC\nN\n\n\n\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         
@@ -144,8 +145,8 @@ public class PartielMedevTest {
     @Test
     void testMainMode2JoueursMotTropCourt() {
         System.out.println("mainMode2JoueursMotTropCourt");
-        // Simule l'entrée : 2 pour mode 2 joueurs, "AB" (trop court), puis "TEST", puis lettres, puis N
-        String input = "2\nAB\nTEST\nT\nE\nS\nN\n";
+        // Simule l'entrée : 2 pour mode 2 joueurs, "AB" (trop court), puis "ABC" (valide), puis lettres A, B, C, puis N pour ne pas rejouer
+        String input = "2\nAB\nABC\nA\nB\nC\nN\n\n\n\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         
@@ -164,8 +165,8 @@ public class PartielMedevTest {
     @Test
     void testMainMode2JoueursMotAvecChiffres() {
         System.out.println("mainMode2JoueursMotAvecChiffres");
-        // Simule l'entrée : 2 pour mode 2 joueurs, "TEST123" (avec chiffres), puis "TEST", puis lettres, puis N
-        String input = "2\nTEST123\nTEST\nT\nE\nS\nN\n";
+        // Simule l'entrée : 2 pour mode 2 joueurs, "TEST123" (avec chiffres), puis "ABC" (valide), puis lettres A, B, C, puis N
+        String input = "2\nTEST123\nABC\nA\nB\nC\nN\n\n\n\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         
@@ -184,8 +185,8 @@ public class PartielMedevTest {
     @Test
     void testMainMode2JoueursMotVide() {
         System.out.println("mainMode2JoueursMotVide");
-        // Simule l'entrée : 2 pour mode 2 joueurs, "" (vide), puis "TEST", puis lettres, puis N
-        String input = "2\n\nTEST\nT\nE\nS\nN\n";
+        // Simule l'entrée : 2 pour mode 2 joueurs, "" (vide), puis "ABC" (valide), puis lettres A, B, C, puis N
+        String input = "2\n\nABC\nA\nB\nC\nN\n\n\n\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         
@@ -204,8 +205,8 @@ public class PartielMedevTest {
     @Test
     void testMainRejouerOui() {
         System.out.println("mainRejouerOui");
-        // Simule l'entrée : 0 pour quitter, O pour rejouer, puis 0 pour quitter définitivement
-        String input = "2\nTEST\nT\nE\nS\nO\n0\n";
+        // Simule l'entrée : mode 2 joueurs, "ABC" comme mot, lettres A, B, C, O pour rejouer, puis 0 pour quitter définitivement
+        String input = "2\nABC\nA\nB\nC\nO\n0\n\n\n\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         
@@ -224,8 +225,8 @@ public class PartielMedevTest {
     @Test
     void testMainRejouerNon() {
         System.out.println("mainRejouerNon");
-        // Simule l'entrée : 2 pour mode 2 joueurs, mot "TEST", lettres, puis N pour ne pas rejouer
-        String input = "2\nTEST\nT\nE\nS\nN\n";
+        // Simule l'entrée : 2 pour mode 2 joueurs, mot "ABC", lettres A, B, C (victoire), puis N pour ne pas rejouer
+        String input = "2\nABC\nA\nB\nC\nN\n\n\n\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         
@@ -244,8 +245,8 @@ public class PartielMedevTest {
     @Test
     void testMainPartieVictoire() {
         System.out.println("mainPartieVictoire");
-        // Simule l'entrée : mode 2 joueurs, mot "JEU", puis toutes les lettres pour gagner
-        String input = "2\nJEU\nJ\nE\nU\nN\n";
+        // Simule l'entrée : mode 2 joueurs, mot "JEU", puis toutes les lettres J, E, U pour gagner, puis N
+        String input = "2\nJEU\nJ\nE\nU\nN\n\n\n\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         
@@ -264,8 +265,8 @@ public class PartielMedevTest {
     @Test
     void testMainPartieAvecErreurs() {
         System.out.println("mainPartieAvecErreurs");
-        // Simule l'entrée : mode 2 joueurs, mot "OUI", puis des lettres incorrectes et correctes
-        String input = "2\nOUI\nA\nB\nC\nO\nU\nI\nN\n";
+        // Simule l'entrée : mode 2 joueurs, mot "OUI", puis des lettres incorrectes A, B, C et correctes O, U, I, puis N
+        String input = "2\nOUI\nA\nB\nC\nO\nU\nI\nN\n\n\n\n";
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         

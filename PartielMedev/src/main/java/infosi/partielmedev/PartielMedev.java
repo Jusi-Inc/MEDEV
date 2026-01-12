@@ -44,9 +44,9 @@ public class PartielMedev {
             
             // Si un jeu a été créé, lancer la partie
             if (game != null) {
-                TourDeJeu tourDeJeu = new TourDeJeu(interfaceJeu);
+                TourDeJeu tourDeJeu = new TourDeJeu(interfaceJeu, scanner);
                 tourDeJeu.jouerPartie(game);
-                tourDeJeu.fermer();
+                // Pas besoin de fermer le scanner car il est partagé avec le main
             }
             
             // Demander si on veut rejouer
