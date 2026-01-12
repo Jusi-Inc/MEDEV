@@ -78,17 +78,13 @@ public class TourDeJeu {
             interfaceJeu.afficherInvite();
             String input = scanner.nextLine().trim().toUpperCase();
             
+            char lettre = input.charAt(0);
+            
             // Vérifie que l'entrée contient exactement un caractère
             if (input.length() != 1) {
                 interfaceJeu.afficherErreur("Vous devez entrer exactement une lettre.");
-                continue;
-            }
-            
-            char lettre = input.charAt(0);
-            
-            // Vérifie que c'est une lettre de A à Z
-            if (lettre < 'A' || lettre > 'Z') {
-                interfaceJeu.afficherErreur("Vous devez entrer une lettre entre A et Z.");
+            }else if (lettre < 'A' || lettre > 'Z') { // Vérifie que c'est une lettre de A à Z
+                interfaceJeu.afficherErreur("Vous devez entrer une lettre entre A et Z."); 
                 continue;
             }
             
@@ -149,7 +145,6 @@ public class TourDeJeu {
      * @return Un ensemble des lettres erronées
      */
     private Set<Character> extraireLettresErronees(String knownLetter, String remainingLetter) {
-        Set<Character> lettresErronees = new HashSet<>();
         
         // Toutes les lettres de A à Z
         Set<Character> toutesLettres = new HashSet<>();
