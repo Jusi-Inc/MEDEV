@@ -11,6 +11,7 @@
         <exec.mainClass>infosi.partielmedev.PartielMedev</exec.mainClass>
 
         <sonar.organization>jusi-inc</sonar.organization>
+        <sonar.projectKey>jusi-inc_MEDEV</sonar.projectKey>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         
     </properties>
